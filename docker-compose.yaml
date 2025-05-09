@@ -1,0 +1,13 @@
+services:
+  api:
+    container_name: photo-grid-api
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - '8000:8000'
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # to connect to MongoDB on docker container's host machine
+      

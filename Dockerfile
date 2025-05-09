@@ -1,0 +1,26 @@
+# Use the official Node.js image as the base image
+FROM node:20-slim
+
+# Install pnpm
+RUN npm install -g pnpm@9
+
+# Expose the application port
+EXPOSE 8000
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy package.json to the working directory
+COPY package.json ./
+
+# Install the application dependencies
+RUN pnpm i
+
+# Copy the rest of the application files
+COPY . .
+
+# Build the NestJS application
+RUN pnpm run build
+
+# Command to run the application
+CMD ["node", "dist/main"]
